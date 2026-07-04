@@ -1,41 +1,41 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { useEffect, useState } from "react";
 
 export default function Hero() {
-  const [greeting, setGreeting] = useState("Welcome");
-
-  useEffect(() => {
-    const hour = new Date().getHours();
-
-    if (hour < 12) {
-      setGreeting("Good Morning");
-    } else if (hour < 18) {
-      setGreeting("Good Afternoon");
-    } else {
-      setGreeting("Good Evening");
-    }
-  }, []);
-
   return (
     <motion.div
-      initial={{ opacity: 0, y: 20 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.5 }}
-      className="space-y-3"
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      transition={{ duration: .4 }}
+      className="space-y-4"
     >
-      <h1 className="text-4xl font-bold tracking-tight">
-        {greeting}, Luv 👋
-      </h1>
+      <div>
 
-      <p className="text-lg text-slate-500">
-        Welcome back to <strong>INDUSMIND AI</strong>.
+        <p className="text-sm font-medium uppercase tracking-wide text-blue-600">
+          Industrial Intelligence Platform
+        </p>
+
+        <h1 className="mt-2 text-5xl font-bold tracking-tight">
+
+          Welcome back, Luv 👋
+
+        </h1>
+
+      </div>
+
+      <p className="max-w-3xl text-lg leading-8 text-slate-500">
+
+        Everything your plant knows.
+
+        Connected.
+
+        Understood.
+
+        Actionable.
+
       </p>
 
-      <p className="text-slate-500">
-        Here's today's industrial intelligence overview.
-      </p>
     </motion.div>
   );
 }
