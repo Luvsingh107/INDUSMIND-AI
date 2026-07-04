@@ -1,17 +1,15 @@
 import AppShell from "@/components/layout/app-shell";
+import DashboardLayout from "@/components/dashboard/dashboard-layout";
+import Hero from "@/components/dashboard/hero";
 
 export default function HomePage() {
   return (
     <AppShell>
-      <div>
-        <h1 className="text-4xl font-bold">
-          Executive Dashboard
-        </h1>
-
-        <p className="text-muted-foreground mt-2">
-          Welcome to INDUSMIND AI
-        </p>
-      </div>
+      <DashboardLayout
+        hero={<Hero />}
+        kpis={<div />}
+      >
+      </DashboardLayout>
     </AppShell>
   );
 }
