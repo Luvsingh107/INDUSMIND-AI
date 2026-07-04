@@ -14,6 +14,10 @@ import RecentDocuments from "@/components/dashboard/recent-documents";
 
 import MaintenancePanel from "@/components/dashboard/maintenance-panel";
 
+import PlantHealthChart from "@/components/charts/plant-health-chart";
+
+import KnowledgeGrowthChart from "@/components/charts/knowledge-growth-chart";
+
 export default function HomePage() {
   return (
     <AppShell>
@@ -29,6 +33,10 @@ export default function HomePage() {
           <RecentDocuments />
 
           <MaintenancePanel />
+
+          <PlantHealthChart />
+
+          <KnowledgeGrowthChart />
         </>
       </DashboardLayout>
     </AppShell>
