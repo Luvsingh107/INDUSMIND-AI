@@ -1,0 +1,68 @@
+# Python
+__pycache__/
+*.py[cod]
+*.so
+.venv/
+.env
+
+# Node
+node_modules/
+.next/
+
+# Logs
+*.log
+
+# macOS
+.DS_Store
+
+# Windows
+Thumbs.db
+
+# VS Code
+.vscode/
+
+# Python cache
+.pytest_cache/
+.mypy_cache/
+
+# Coverage
+.coverage
+htmlcov/
+
+# Build
+dist/
+build/
+
+# Local databases
+*.db
+
+# ChromaDB
+chroma/
+
+# Temporary files
+tmp/
+temp/
+
+# ===========================
+# Local datasets
+# ===========================
+
+datasets/
+
+# Generated enterprise data
+generator/output/
+
+# Neo4j
+neo4j/
+
+# Models
+models/
+
+# Ollama
+ollama/
+
+# Local uploads
+uploads/
+
+# Vector database
+vector_db/
