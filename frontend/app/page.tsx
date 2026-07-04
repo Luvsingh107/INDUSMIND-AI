@@ -18,6 +18,10 @@ import PlantHealthChart from "@/components/charts/plant-health-chart";
 
 import KnowledgeGrowthChart from "@/components/charts/knowledge-growth-chart";
 
+import ActivityTimeline from "@/components/dashboard/activity-timeline";
+
+import AssetHealthChart from "@/components/dashboard/asset-health-chart";
+
 export default function HomePage() {
   return (
     <AppShell>
@@ -37,6 +41,11 @@ export default function HomePage() {
           <PlantHealthChart />
 
           <KnowledgeGrowthChart />
+
+          <ActivityTimeline />
+
+          <AssetHealthChart />
+
         </>
       </DashboardLayout>
     </AppShell>
