@@ -1,9 +1,8 @@
 export interface DashboardStat {
   title: string;
-
-  value: string;
-
-  change: string;
-
-  positive: boolean;
+  value: number;
+  suffix: string;
+  trend: string;
+  description: string;
+  icon: "activity" | "shield" | "brain" | "alert";
 }
