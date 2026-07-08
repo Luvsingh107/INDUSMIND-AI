@@ -1,7 +1,6 @@
-from fastapi import APIRouter
-from fastapi import UploadFile
-from fastapi import File
+from fastapi import APIRouter, File, UploadFile
 
+from app.schemas.document import DocumentUploadResponse
 from app.services.document_service import DocumentService
 
 router = APIRouter(
@@ -9,10 +8,14 @@ router = APIRouter(
     tags=["Documents"],
 )
 
+service = DocumentService()
 
-@router.post("/upload")
+
+@router.post(
+    "/upload",
+    response_model=DocumentUploadResponse,
+)
 async def upload_document(
-    file: UploadFile = File(...)
+    file: UploadFile = File(...),
 ):
-
-    return await DocumentService.process(file)
+    return await service.process(file)

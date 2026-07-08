@@ -1,4 +1,4 @@
-from typing import Dict, List
+from typing import List
 
 from pydantic import BaseModel
 
@@ -14,5 +14,5 @@ class DocumentUploadResponse(BaseModel):
     characters: int
     chunks: int
     metadata: DocumentMetadataSchema
-    extracted_text: str
     cleaned: bool
+    indexed: bool
