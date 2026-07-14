@@ -9,6 +9,7 @@ class SearchRequest(BaseModel):
 class SearchResult(BaseModel):
     text: str
     score: float
+    metadata: dict
 
 
 class SearchResponse(BaseModel):

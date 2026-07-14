@@ -2,7 +2,7 @@ from fastapi import APIRouter
 
 from app.schemas.search import SearchRequest
 from app.schemas.search import SearchResponse
-from app.services.search_service import SearchService
+from app.search.search_service import SearchService
 
 router = APIRouter(
     prefix="/search",
@@ -16,9 +16,7 @@ service = SearchService()
     "",
     response_model=SearchResponse,
 )
-async def semantic_search(
-    request: SearchRequest,
-):
+async def search(request: SearchRequest):
     return service.search(
         request.query,
         request.top_k,

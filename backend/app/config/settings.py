@@ -1,25 +1,37 @@
 from pathlib import Path
+from dotenv import load_dotenv
+import os
 
-from pydantic_settings import BaseSettings
+BASE_DIR = Path(__file__).resolve().parent.parent.parent
+
+load_dotenv(BASE_DIR / ".env")
 
 
-class Settings(BaseSettings):
-    APP_NAME: str = "INDUSMIND AI"
+class Settings:
 
-    VERSION: str = "0.1.0"
+    APP_NAME = "INDUSMIND AI"
 
-    API_PREFIX: str = "/api/v1"
+    VERSION = "1.0.0"
 
-    DEBUG: bool = True
+    BASE_DIR = BASE_DIR
 
-    BASE_DIR: Path = Path(__file__).resolve().parent.parent.parent
+    UPLOAD_DIR = BASE_DIR / "uploads"
 
-    UPLOAD_DIR: Path = BASE_DIR / "uploads"
+    OPENROUTER_API_KEY = os.getenv("OPENROUTER_API_KEY")
 
-    class Config:
-        env_file = ".env"
+    OPENROUTER_MODEL = os.getenv(
+        "OPENROUTER_MODEL",
+        "google/gemma-3-4b-it:free",
+    )
+
+    LLM_PROVIDER = os.getenv(
+        "LLM_PROVIDER",
+        "openrouter",
+    )
 
 
 settings = Settings()
 
-settings.UPLOAD_DIR.mkdir(parents=True, exist_ok=True)
+settings.UPLOAD_DIR.mkdir(
+    exist_ok=True,
+)

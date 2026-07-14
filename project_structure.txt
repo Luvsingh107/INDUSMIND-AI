@@ -1,0 +1,351 @@
+.
+├── .gitignore
+├── README.md
+├── architecture
+├── assets
+├── backend
+│   ├── .env
+│   ├── app
+│   │   ├── agents
+│   │   ├── api
+│   │   │   ├── router.py
+│   │   │   └── routes
+│   │   │       ├── documents.py
+│   │   │       ├── health.py
+│   │   │       ├── rag.py
+│   │   │       └── search.py
+│   │   ├── chunking
+│   │   │   ├── __init__.py
+│   │   │   └── text_chunker.py
+│   │   ├── config
+│   │   │   ├── constants.py
+│   │   │   ├── logging.py
+│   │   │   └── settings.py
+│   │   ├── core
+│   │   │   ├── exceptions.py
+│   │   │   └── lifespan.py
+│   │   ├── database
+│   │   │   ├── __init__.py
+│   │   │   ├── chroma.py
+│   │   │   ├── graph.py
+│   │   │   └── postgres.py
+│   │   ├── embeddings
+│   │   │   ├── __init__.py
+│   │   │   └── embedding_service.py
+│   │   ├── entities
+│   │   │   ├── __init__.py
+│   │   │   └── entity_extractor.py
+│   │   ├── graph
+│   │   ├── ingestion
+│   │   │   ├── extractors
+│   │   │   │   ├── classifier.py
+│   │   │   │   ├── entity_extractor.py
+│   │   │   │   ├── metadata_extractor.py
+│   │   │   │   └── summary_generator.py
+│   │   │   ├── loaders
+│   │   │   │   ├── image_loader.py
+│   │   │   │   ├── loader_factory.py
+│   │   │   │   └── pdf_loader.py
+│   │   │   ├── parsers
+│   │   │   │   ├── ocr_parser.py
+│   │   │   │   ├── pymupdf_parser.py
+│   │   │   │   └── table_parser.py
+│   │   │   └── pipeline.py
+│   │   ├── knowledge_pipeline
+│   │   │   ├── __init__.py
+│   │   │   ├── chunker.py
+│   │   │   ├── classifier.py
+│   │   │   ├── embedder.py
+│   │   │   ├── entity_extractor.py
+│   │   │   ├── indexer.py
+│   │   │   ├── loader.py
+│   │   │   ├── metadata.py
+│   │   │   ├── pipeline.py
+│   │   │   ├── relationship_builder.py
+│   │   │   └── validator.py
+│   │   ├── llm
+│   │   │   ├── __init__.py
+│   │   │   ├── answer_service.py
+│   │   │   ├── base.py
+│   │   │   ├── citation_service.py
+│   │   │   ├── factory.py
+│   │   │   ├── ollama_client.py
+│   │   │   ├── openrouter_provider.py
+│   │   │   └── prompt_builder.py
+│   │   ├── main.py
+│   │   ├── metadata
+│   │   │   ├── __init__.py
+│   │   │   └── document_metadata.py
+│   │   ├── models
+│   │   ├── ocr
+│   │   │   └── __init__.py
+│   │   ├── orchestrator
+│   │   ├── parser
+│   │   │   ├── __init__.py
+│   │   │   └── pdf_parser.py
+│   │   ├── prompts
+│   │   ├── rag
+│   │   │   ├── __init__.py
+│   │   │   ├── ollama_client.py
+│   │   │   ├── prompt_builder.py
+│   │   │   ├── rag_service.py
+│   │   │   └── retriever.py
+│   │   ├── repositories
+│   │   │   ├── __init__.py
+│   │   │   ├── asset_repository.py
+│   │   │   └── document_repository.py
+│   │   ├── schemas
+│   │   │   ├── chunk.py
+│   │   │   ├── document.py
+│   │   │   ├── document_schema.py
+│   │   │   ├── rag.py
+│   │   │   └── search.py
+│   │   ├── search
+│   │   │   └── search_service.py
+│   │   ├── services
+│   │   │   ├── __init__.py
+│   │   │   ├── asset_service.py
+│   │   │   ├── copilot_service.py
+│   │   │   ├── document_service.py
+│   │   │   └── search_service.py
+│   │   ├── storage
+│   │   │   ├── __init__.py
+│   │   │   └── file_storage.py
+│   │   ├── utils
+│   │   │   └── text_cleaner.py
+│   │   └── vectorstore
+│   │       └── chroma_service.py
+│   ├── backend
+│   │   └── app
+│   │       └── services
+│   │           └── document_service.py
+│   ├── requirements.txt
+│   ├── test_openrouter.py
+│   └── tests
+├── datasets
+│   ├── drawings
+│   │   ├── PID_1.pdf
+│   │   ├── PID_2.pdf
+│   │   └── PID_3.pdf
+│   ├── generated
+│   │   ├── audits
+│   │   ├── calibration
+│   │   ├── emails
+│   │   ├── incidents
+│   │   ├── inspections
+│   │   ├── maintenance_logs
+│   │   ├── procurement
+│   │   ├── rca
+│   │   ├── shift_logs
+│   │   ├── spare_requests
+│   │   └── work_orders
+│   ├── incidents
+│   │   ├── Incident_Report_Form_1.pdf
+│   │   ├── Incident_Report_Form_2.pdf
+│   │   ├── Incident_Report_Form_3.pdf
+│   │   └── Incident_Report_Form_4.pdf
+│   ├── inspections
+│   │   ├── Inspection_Report_1.pdf
+│   │   ├── Inspection_Report_2.pdf
+│   │   ├── Inspection_Report_3.pdf
+│   │   └── Inspection_Report_4.pdf
+│   ├── maintenance
+│   │   ├── Maintenance_Report_1.pdf
+│   │   ├── Maintenance_Report_2.pdf
+│   │   ├── Maintenance_Report_3.pdf
+│   │   ├── Maintenance_Report_4.pdf
+│   │   └── Maintenance_Report_5.pdf
+│   ├── manuals
+│   │   ├── Equipment_Manual_ATL.pdf
+│   │   ├── Equipment_Manual_Boiler.pdf
+│   │   ├── Equipment_Manual_Compressed_Air_AtlasCopco.pdf
+│   │   ├── Equipment_Manual_Control_Valve_Emerson.pdf
+│   │   ├── Equipment_Manual_Cooling_Tower.pdf
+│   │   ├── Equipment_Manual_Flow_Meter.pdf
+│   │   ├── Equipment_Manual_Gearbox.pdf
+│   │   ├── Equipment_Manual_Heat_Exchanger_AlphaLaval.pdf
+│   │   ├── Equipment_Manual_Industrial_Motor_ABB.pdf
+│   │   ├── Equipment_Manual_Industrial_Motor_UNIDO.pdf
+│   │   ├── Equipment_Manual_Pressure_Valve_AlphaLaval.pdf
+│   │   └── Equipment_Manual_Pump_LKH.pdf
+│   ├── metadata
+│   ├── regulations
+│   │   ├── Factory_Act.pdf
+│   │   ├── Hazard_Communication.pdf
+│   │   ├── ISO_45001.pdf
+│   │   ├── ISO_9001.pdf
+│   │   └── OSHA.pdf
+│   ├── sop
+│   │   ├── Chemical_Handling_SOP.pdf
+│   │   ├── Confined_Space_Entry.pdf
+│   │   ├── Emergency_Shutdown_SOP.pdf
+│   │   ├── Hot_Work_Permit_Form.pdf
+│   │   └── Lockout__Tagout_LOTO.pdf
+│   ├── vendor_docs
+│   │   ├── Air_Compressor.pdf
+│   │   ├── Centrifugal_Pump_Catalog.pdf
+│   │   ├── Control_Valve_Datasheet.pdf
+│   │   ├── Electric_Motor_Technical_Specification.pdf
+│   │   ├── Flow_Meter_Product_Catalog.pdf
+│   │   ├── Heat_Exchanger_Product_Datasheet.pdf
+│   │   ├── Industrial_Pressure_Gauge_Datasheet.pdf
+│   │   ├── Pressure_Relief_Valve_Datasheet.pdf
+│   │   └── Temperature_Transmitter_Technical_Datasheet.pdf
+│   └── work_orders
+├── demo
+├── docs
+│   ├── 01_Product_Vision.md
+│   ├── 02_PRD.md
+│   ├── 03_System_Architecture.md
+│   ├── 04_Agent_Architecture.md
+│   ├── 05_Database.md
+│   ├── 06_Knowledge_Graph.md
+│   ├── 07_API.md
+│   ├── 08_UI_UX.md
+│   ├── 09_Dataset.md
+│   ├── 10_Deployment.md
+│   ├── 11_Industrial_Ontology.md
+│   ├── 12_Product_Modules.md
+│   ├── 13_User_Personas.md
+│   ├── 14_Company_Profile.md
+│   ├── 15_Plant_Layout.md
+│   ├── 16_Asset_Register.md
+│   ├── 17_Employee_Directory.md
+│   ├── 18_Operational_Timeline.md
+│   ├── 19_Knowledge_Universe.md
+│   ├── 20_Industrial_Ontology.md
+│   ├── 21_Metadata_Schema.md
+│   └── 22_Document_Lifecycle.md
+├── frontend
+│   ├── .env.local
+│   ├── .gitignore
+│   ├── AGENTS.md
+│   ├── CLAUDE.md
+│   ├── README.md
+│   ├── app
+│   │   ├── favicon.ico
+│   │   ├── globals.css
+│   │   ├── layout.tsx
+│   │   └── page.tsx
+│   ├── components
+│   │   ├── assets
+│   │   ├── charts
+│   │   │   ├── knowledge-growth-chart.tsx
+│   │   │   └── plant-health-chart.tsx
+│   │   ├── chat
+│   │   ├── common
+│   │   ├── compliance
+│   │   ├── copilot
+│   │   │   ├── ChatInput.tsx
+│   │   │   ├── ChatWindow.tsx
+│   │   │   ├── CopilotPage.tsx
+│   │   │   ├── MessageBubble.tsx
+│   │   │   └── SuggestedQuestions.tsx
+│   │   ├── dashboard
+│   │   │   ├── activity-timeline.tsx
+│   │   │   ├── alert-panel.tsx
+│   │   │   ├── asset-health-chart.tsx
+│   │   │   ├── dashboard-header.tsx
+│   │   │   ├── dashboard-layout.tsx
+│   │   │   ├── dashboard-section.tsx
+│   │   │   ├── hero.tsx
+│   │   │   ├── kpi-card.tsx
+│   │   │   ├── kpi-grid.tsx
+│   │   │   ├── maintenance-panel.tsx
+│   │   │   ├── recent-documents.tsx
+│   │   │   ├── recommendation-panel.tsx
+│   │   │   └── widgets
+│   │   │       ├── alert-widget.tsx
+│   │   │       ├── document-widget.tsx
+│   │   │       ├── maintenance-widget.tsx
+│   │   │       └── recommendation-widget.tsx
+│   │   ├── knowledge
+│   │   ├── layout
+│   │   │   ├── app-layout.tsx
+│   │   │   ├── app-shell.tsx
+│   │   │   ├── sidebar.tsx
+│   │   │   └── topbar.tsx
+│   │   ├── maintenance
+│   │   ├── navigation
+│   │   │   └── navigation-items.ts
+│   │   ├── ui
+│   │   │   ├── avatar.tsx
+│   │   │   ├── badge.tsx
+│   │   │   ├── button.tsx
+│   │   │   ├── card.tsx
+│   │   │   ├── dialog.tsx
+│   │   │   ├── dropdown-menu.tsx
+│   │   │   ├── input.tsx
+│   │   │   ├── progress.tsx
+│   │   │   ├── scroll-area.tsx
+│   │   │   ├── separator.tsx
+│   │   │   ├── sheet.tsx
+│   │   │   ├── skeleton.tsx
+│   │   │   ├── table.tsx
+│   │   │   └── tooltip.tsx
+│   │   └── upload
+│   ├── components.json
+│   ├── constants
+│   │   ├── navigation.ts
+│   │   └── theme.ts
+│   ├── data
+│   │   ├── activity.ts
+│   │   ├── alerts.ts
+│   │   ├── analytics.ts
+│   │   ├── assets.ts
+│   │   ├── dashboard.ts
+│   │   ├── documents.ts
+│   │   ├── maintenance.ts
+│   │   └── recommendations.ts
+│   ├── eslint.config.mjs
+│   ├── hooks
+│   │   └── useChat.ts
+│   ├── lib
+│   │   ├── design
+│   │   │   ├── colors.ts
+│   │   │   ├── spacing.ts
+│   │   │   └── typography.ts
+│   │   └── utils.ts
+│   ├── next-env.d.ts
+│   ├── next.config.ts
+│   ├── package-lock.json
+│   ├── package.json
+│   ├── postcss.config.mjs
+│   ├── public
+│   │   ├── file.svg
+│   │   ├── globe.svg
+│   │   ├── next.svg
+│   │   ├── vercel.svg
+│   │   └── window.svg
+│   ├── services
+│   │   ├── api.ts
+│   │   ├── chat.ts
+│   │   ├── dashboard.ts
+│   │   └── document.ts
+│   ├── tsconfig.json
+│   └── types
+│       ├── asset.ts
+│       ├── chat.ts
+│       ├── dashboard.ts
+│       └── document.ts
+├── generator
+│   ├── __init__.py
+│   ├── assets.py
+│   ├── calibration.py
+│   ├── emails.py
+│   ├── employees.py
+│   ├── generate_all.py
+│   ├── incidents.py
+│   ├── inspections.py
+│   ├── maintenance.py
+│   ├── procurement.py
+│   ├── rca.py
+│   ├── shift_logs.py
+│   └── work_orders.py
+├── journal
+│   └── Day02.md
+├── presentation
+├── project_structure.txt
+└── research
+
+93 directories, 256 files
