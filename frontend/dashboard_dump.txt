@@ -1,0 +1,466 @@
+
+==============================
+components/dashboard/activity-timeline.tsx
+==============================
+"use client";
+
+import DashboardSection from "./dashboard-section";
+import { activityTimeline } from "@/data/activity";
+
+export default function ActivityTimeline() {
+  return (
+    <DashboardSection
+      title="Live Activity"
+      subtitle="Latest AI and platform events"
+    >
+      <div className="space-y-5">
+        {activityTimeline.map((item) => (
+          <div
+            key={item.id}
+            className="border-l-2 border-blue-500 pl-4"
+          >
+            <h4 className="font-semibold">
+              {item.type}
+            </h4>
+
+            <p className="text-sm text-slate-500">
+              {item.description}
+            </p>
+
+            <p className="mt-1 text-xs text-slate-400">
+              {item.time}
+            </p>
+          </div>
+        ))}
+      </div>
+    </DashboardSection>
+  );
+}
+==============================
+components/dashboard/alert-panel.tsx
+==============================
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { alerts } from "@/data/alerts";
+import { Badge } from "@/components/ui/badge";
+
+export default function AlertPanel() {
+  return (
+    <Card className="rounded-2xl">
+      <CardHeader>
+        <CardTitle>🚨 Live Alerts</CardTitle>
+      </CardHeader>
+
+      <CardContent className="space-y-4">
+        {alerts.map((alert) => (
+          <div
+            key={alert.id}
+            className="rounded-xl border p-4 space-y-2"
+          >
+            <div className="flex items-center justify-between">
+              <h4 className="font-semibold">
+                {alert.asset}
+              </h4>
+
+              <Badge variant="destructive">
+                {alert.severity}
+              </Badge>
+            </div>
+
+            <p className="text-sm text-slate-500">
+              {alert.message}
+            </p>
+          </div>
+        ))}
+      </CardContent>
+    </Card>
+  );
+}
+==============================
+components/dashboard/asset-health-chart.tsx
+==============================
+"use client";
+
+import DashboardSection from "./dashboard-section";
+
+import { assetHealth } from "@/data/assets";
+
+import {
+  PieChart,
+  Pie,
+  Cell,
+  ResponsiveContainer,
+  Tooltip,
+} from "recharts";
+
+const COLORS = [
+  "#22C55E",
+  "#F59E0B",
+  "#EF4444",
+];
+
+export default function AssetHealthChart() {
+  return (
+    <DashboardSection
+      title="Asset Health Distribution"
+      subtitle="Current fleet condition"
+    >
+      <div className="h-80">
+        <ResponsiveContainer>
+          <PieChart>
+            <Pie
+              data={assetHealth}
+              dataKey="value"
+              outerRadius={110}
+            >
+              {assetHealth.map((_, index) => (
+                <Cell
+                  key={index}
+                  fill={COLORS[index]}
+                />
+              ))}
+            </Pie>
+
+            <Tooltip />
+          </PieChart>
+        </ResponsiveContainer>
+      </div>
+    </DashboardSection>
+  );
+}
+==============================
+components/dashboard/dashboard-header.tsx
+==============================
+
+==============================
+components/dashboard/dashboard-layout.tsx
+==============================
+import { ReactNode } from "react";
+
+interface Props {
+  hero: ReactNode;
+  kpis: ReactNode;
+  children: ReactNode;
+}
+
+export default function DashboardLayout({
+  hero,
+  kpis,
+  children,
+}: Props) {
+  return (
+    <div className="mx-auto max-w-7xl space-y-8">
+
+      {hero}
+
+      {kpis}
+
+      <div className="grid gap-6 lg:grid-cols-2">
+        {children}
+      </div>
+
+    </div>
+  );
+}
+==============================
+components/dashboard/dashboard-section.tsx
+==============================
+import { ReactNode } from "react";
+
+interface DashboardSectionProps {
+  title: string;
+  subtitle?: string;
+  children: ReactNode;
+}
+
+export default function DashboardSection({
+  title,
+  subtitle,
+  children,
+}: DashboardSectionProps) {
+  return (
+    <section className="rounded-2xl border border-slate-200 bg-white shadow-sm">
+
+      <div className="border-b px-6 py-4">
+
+        <h2 className="text-lg font-semibold">
+          {title}
+        </h2>
+
+        {subtitle && (
+          <p className="mt-1 text-sm text-slate-500">
+            {subtitle}
+          </p>
+        )}
+
+      </div>
+
+      <div className="p-6">
+        {children}
+      </div>
+
+    </section>
+  );
+}
+==============================
+components/dashboard/hero.tsx
+==============================
+"use client";
+
+import { motion } from "framer-motion";
+
+export default function Hero() {
+  return (
+    <motion.div
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      transition={{ duration: .4 }}
+      className="space-y-4"
+    >
+      <div>
+
+        <p className="text-sm font-medium uppercase tracking-wide text-blue-600">
+          Industrial Intelligence Platform
+        </p>
+
+        <h1 className="mt-2 text-5xl font-bold tracking-tight">
+
+          Welcome back, Luv 👋
+
+        </h1>
+
+      </div>
+
+      <p className="max-w-3xl text-lg leading-8 text-slate-500">
+
+        Everything your plant knows.
+
+        Connected.
+
+        Understood.
+
+        Actionable.
+
+      </p>
+
+    </motion.div>
+  );
+}
+==============================
+components/dashboard/kpi-card.tsx
+==============================
+"use client";
+
+import { motion } from "framer-motion";
+import { Card, CardContent } from "@/components/ui/card";
+import { Progress } from "@/components/ui/progress";
+
+import {
+  Activity,
+  Brain,
+  ShieldCheck,
+  TriangleAlert,
+} from "lucide-react";
+
+interface KPIProps {
+  title: string;
+  value: number;
+  suffix: string;
+  trend: string;
+  description: string;
+  icon: "activity" | "shield" | "brain" | "alert";
+}
+
+const icons = {
+  activity: Activity,
+  shield: ShieldCheck,
+  brain: Brain,
+  alert: TriangleAlert,
+};
+
+export default function KPICard({
+  title,
+  value,
+  suffix,
+  trend,
+  description,
+  icon,
+}: KPIProps) {
+  const Icon = icons[icon];
+
+  const isPositiveTrend = trend.startsWith("+");
+
+  return (
+    <motion.div
+      whileHover={{ y: -6 }}
+      transition={{ duration: 0.2 }}
+    >
+      <Card className="rounded-2xl border border-slate-200 shadow-sm transition-all hover:shadow-lg">
+        <CardContent className="space-y-5 p-6">
+          <div className="flex items-center justify-between">
+            <div className="rounded-xl bg-slate-100 p-3">
+              <Icon className="h-6 w-6 text-blue-600" />
+            </div>
+
+            <span
+              className={`text-sm font-semibold ${
+                isPositiveTrend
+                  ? "text-green-600"
+                  : "text-red-600"
+              }`}
+            >
+              {trend}
+            </span>
+          </div>
+
+          <div>
+            <p className="text-sm text-slate-500">
+              {title}
+            </p>
+
+            <h2 className="mt-2 text-4xl font-bold tracking-tight">
+              {value}
+              {suffix}
+            </h2>
+          </div>
+
+          <Progress value={value} className="h-2" />
+
+          <p className="text-sm text-slate-500">
+            {description}
+          </p>
+        </CardContent>
+      </Card>
+    </motion.div>
+  );
+}
+==============================
+components/dashboard/kpi-grid.tsx
+==============================
+import KPICard from "./kpi-card";
+import { dashboardStats } from "@/data/dashboard";
+
+export default function KPIGrid() {
+  return (
+    <section
+      className="
+      grid
+      gap-6
+      md:grid-cols-2
+      xl:grid-cols-4
+      "
+    >
+      {dashboardStats.map((item) => (
+        <KPICard
+          key={item.title}
+          {...item}
+        />
+      ))}
+    </section>
+  );
+}
+==============================
+components/dashboard/maintenance-panel.tsx
+==============================
+import DashboardSection from "./dashboard-section";
+import { maintenanceSchedule } from "@/data/maintenance";
+import { Badge } from "@/components/ui/badge";
+
+export default function MaintenancePanel() {
+  return (
+    <DashboardSection
+      title="Upcoming Maintenance"
+      subtitle="Scheduled preventive maintenance"
+    >
+      <div className="space-y-4">
+        {maintenanceSchedule.map((item) => (
+          <div
+            key={item.id}
+            className="flex items-center justify-between rounded-xl border p-4"
+          >
+            <div>
+              <h4 className="font-medium">{item.asset}</h4>
+
+              <p className="text-sm text-slate-500">
+                {item.date}
+              </p>
+            </div>
+
+            <Badge>{item.priority}</Badge>
+          </div>
+        ))}
+      </div>
+    </DashboardSection>
+  );
+}
+==============================
+components/dashboard/recent-documents.tsx
+==============================
+import DashboardSection from "./dashboard-section";
+import { recentDocuments } from "@/data/documents";
+
+export default function RecentDocuments() {
+  return (
+    <DashboardSection
+      title="Recent Documents"
+      subtitle="Latest uploaded industrial knowledge"
+    >
+      <div className="space-y-4">
+        {recentDocuments.map((doc) => (
+          <div
+            key={doc.id}
+            className="rounded-xl border p-4 transition hover:bg-slate-50"
+          >
+            <h4 className="font-medium">{doc.title}</h4>
+
+            <p className="text-sm text-slate-500">
+              {doc.type} • {doc.uploadedBy}
+            </p>
+
+            <p className="mt-1 text-xs text-slate-400">
+              {doc.time}
+            </p>
+          </div>
+        ))}
+      </div>
+    </DashboardSection>
+  );
+}
+==============================
+components/dashboard/recommendation-panel.tsx
+==============================
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { recommendations } from "@/data/recommendations";
+import { Badge } from "@/components/ui/badge";
+
+export default function RecommendationPanel() {
+  return (
+    <Card className="rounded-2xl">
+      <CardHeader>
+        <CardTitle>🤖 AI Recommendations</CardTitle>
+      </CardHeader>
+
+      <CardContent className="space-y-4">
+        {recommendations.map((item) => (
+          <div
+            key={item.id}
+            className="rounded-xl border p-4 space-y-2"
+          >
+            <div className="flex items-center justify-between">
+              <h4 className="font-semibold">{item.title}</h4>
+
+              <Badge>{item.priority}</Badge>
+            </div>
+
+            <p className="text-sm text-slate-500">
+              {item.asset}
+            </p>
+
+            <p className="text-sm">
+              {item.reason}
+            </p>
+          </div>
+        ))}
+      </CardContent>
+    </Card>
+  );
+}
