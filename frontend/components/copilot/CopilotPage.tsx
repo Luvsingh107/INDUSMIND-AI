@@ -1,70 +1,58 @@
 "use client";
 
-import ChatWindow from "./ChatWindow";
-
 import ChatInput from "./ChatInput";
-
+import ChatWindow from "./ChatWindow";
 import SuggestedQuestions from "./SuggestedQuestions";
 
 import { useChat } from "@/hooks/useChat";
 
 export default function CopilotPage() {
 
-    const {
+  const {
+    messages,
+    loading,
+    send,
+  } = useChat();
 
-        messages,
+  return (
 
-        loading,
+    <div className="flex h-full flex-col">
 
-        send,
+      <div className="mb-6">
 
-    } = useChat();
+        <h1 className="text-4xl font-bold">
+          Industrial AI Copilot
+        </h1>
 
-    return (
+        <p className="mt-2 text-gray-500">
+          Ask questions about manuals, maintenance, SOPs and uploaded documents.
+        </p>
 
-        <div className="max-w-6xl mx-auto py-10 space-y-8">
+      </div>
 
-            <div>
+      <SuggestedQuestions
+        onSelect={send}
+      />
 
-                <h1 className="text-4xl font-bold">
+      <div className="mt-6 flex-1 overflow-hidden rounded-2xl border bg-white shadow-sm">
 
-                    Industrial AI Copilot
+        <ChatWindow
+          messages={messages}
+        />
 
-                </h1>
+      </div>
 
-                <p className="text-gray-500 mt-2">
+      <div className="mt-6">
 
-                    Ask questions about manuals,
-                    maintenance,
-                    SOPs
-                    and uploaded documents.
+        <ChatInput
+          onSend={send}
+          loading={loading}
+        />
 
-                </p>
+      </div>
 
-            </div>
+    </div>
 
-            <SuggestedQuestions
-
-                onSelect={send}
-
-            />
-
-            <ChatWindow
-
-                messages={messages}
-
-            />
-
-            <ChatInput
-
-                onSend={send}
-
-                loading={loading}
-
-            />
-
-        </div>
-
-    );
+  );
 
 }

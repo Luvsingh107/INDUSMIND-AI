@@ -1,102 +1,52 @@
-"use client";
-
-import { useEffect, useState } from "react";
 import AppShell from "@/components/layout/app-shell";
-import api from "@/services/api";
 
-interface Document {
-  filename: string;
-  pages: number;
-  equipment: string[];
-  maintenance_intervals: string[];
-}
+import DashboardLayout from "@/components/dashboard/dashboard-layout";
 
-export default function KnowledgePage() {
-  const [documents, setDocuments] = useState<Document[]>([]);
-  const [loading, setLoading] = useState(true);
+import Hero from "@/components/dashboard/hero";
 
-  useEffect(() => {
-    async function loadDocuments() {
-      try {
-        const { data } = await api.get<Document[]>("/knowledge/documents");
-        setDocuments(data);
-      } catch (error) {
-        console.error(error);
-      } finally {
-        setLoading(false);
-      }
-    }
+import KPIGrid from "@/components/dashboard/kpi-grid";
 
-    loadDocuments();
-  }, []);
+import RecommendationPanel from "@/components/dashboard/recommendation-panel";
 
+import AlertPanel from "@/components/dashboard/alert-panel";
+
+import RecentDocuments from "@/components/dashboard/recent-documents";
+
+import MaintenancePanel from "@/components/dashboard/maintenance-panel";
+
+import PlantHealthChart from "@/components/charts/plant-health-chart";
+
+import KnowledgeGrowthChart from "@/components/charts/knowledge-growth-chart";
+
+import ActivityTimeline from "@/components/dashboard/activity-timeline";
+
+import AssetHealthChart from "@/components/dashboard/asset-health-chart";
+
+export default function HomePage() {
   return (
     <AppShell>
-      <div className="mx-auto max-w-7xl">
+      <DashboardLayout
+        hero={<Hero />}
+        kpis={<KPIGrid />}
+      >
+        <>
+          <RecommendationPanel />
 
-        <h1 className="text-4xl font-bold">
-          Knowledge Hub
-        </h1>
+          <AlertPanel />
 
-        <p className="mt-2 text-slate-500">
-          Uploaded industrial manuals and extracted knowledge
-        </p>
+          <RecentDocuments />
 
-        {loading && (
-          <div className="mt-10 text-lg">
-            Loading documents...
-          </div>
-        )}
+          <MaintenancePanel />
 
-        <div className="mt-8 grid gap-6">
+          <PlantHealthChart />
 
-          {documents.map((doc) => (
-            <div
-              key={doc.filename}
-              className="rounded-2xl border bg-white p-6 shadow-sm"
-            >
-              <h2 className="text-xl font-semibold">
-                {doc.filename}
-              </h2>
+          <KnowledgeGrowthChart />
 
-              <div className="mt-3 flex gap-8 text-sm text-slate-500">
-                <span>Pages: {doc.pages}</span>
-                <span>Assets: {doc.equipment.length}</span>
-                <span>Intervals: {doc.maintenance_intervals.length}</span>
-              </div>
+          <ActivityTimeline />
 
-              <div className="mt-5 flex flex-wrap gap-2">
-
-                {doc.equipment.map((asset) => (
-                  <span
-                    key={asset}
-                    className="rounded-full bg-blue-100 px-3 py-1 text-sm"
-                  >
-                    {asset}
-                  </span>
-                ))}
-
-              </div>
-
-              <div className="mt-4 flex flex-wrap gap-2">
-
-                {doc.maintenance_intervals.map((item) => (
-                  <span
-                    key={item}
-                    className="rounded-full bg-green-100 px-3 py-1 text-sm"
-                  >
-                    {item}
-                  </span>
-                ))}
-
-              </div>
-
-            </div>
-          ))}
-
-        </div>
-
-      </div>
+          <AssetHealthChart />
+        </>
+      </DashboardLayout>
     </AppShell>
   );
 }
