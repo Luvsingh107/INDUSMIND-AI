@@ -17,8 +17,21 @@ class Retriever:
             top_k=top_k,
         )
 
-        return [
-            item["text"]
-            for item in results["results"]
-            if item["score"] > 0
-        ]
+        chunks = []
+
+        for item in results["results"]:
+
+            if item["score"] <= 0:
+                continue
+
+            metadata = item.get("metadata", {}) or {}
+
+            chunks.append(
+                {
+                    "text": item["text"],
+                    "score": item["score"],
+                    "metadata": metadata,
+                }
+            )
+
+        return chunks

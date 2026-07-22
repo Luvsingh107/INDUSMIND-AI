@@ -22,11 +22,24 @@ import ActivityTimeline from "@/components/dashboard/activity-timeline";
 
 import AssetHealthChart from "@/components/dashboard/asset-health-chart";
 
+import StatusBar from "@/components/dashboard/status-bar";
+
+import SystemHealth from "@/components/dashboard/system-health";
+
 export default function HomePage() {
   return (
     <AppShell>
+
+      <StatusBar />
+
       <DashboardLayout
-        hero={<Hero />}
+        hero={
+          <>
+            <Hero />
+
+            <SystemHealth />
+          </>
+        }
         kpis={<KPIGrid />}
       >
         <>
@@ -47,6 +60,7 @@ export default function HomePage() {
           <AssetHealthChart />
         </>
       </DashboardLayout>
+
     </AppShell>
   );
 }

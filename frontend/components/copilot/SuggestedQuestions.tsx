@@ -1,53 +1,36 @@
 "use client";
 
-const questions = [
+type Props = {
+    onSelect: (question: string) => void;
+};
 
-    "What is preventive maintenance?",
-
-    "How often should bearings be inspected?",
-
-    "List all lubrication intervals.",
-
-    "Explain pump maintenance.",
-
-    "Show safety precautions.",
-
+const QUESTIONS = [
+    "What spare parts are required?",
+    "Show lubrication intervals.",
+    "What safety precautions should be followed?",
+    "Explain the maintenance procedure.",
 ];
 
 export default function SuggestedQuestions({
-
     onSelect,
-
-}: {
-
-    onSelect: (q: string) => void;
-
-}) {
-
+}: Props) {
     return (
+        <div className="mt-6">
+            <div className="font-semibold mb-3 text-sm text-gray-700">
+                💡 Suggested Questions
+            </div>
 
-        <div className="flex flex-wrap gap-3">
-
-            {questions.map((q) => (
-
-                <button
-
-                    key={q}
-
-                    onClick={() => onSelect(q)}
-
-                    className="rounded-full border px-4 py-2 hover:bg-gray-100"
-
-                >
-
-                    {q}
-
-                </button>
-
-            ))}
-
+            <div className="flex flex-wrap gap-2">
+                {QUESTIONS.map((question) => (
+                    <button
+                        key={question}
+                        onClick={() => onSelect(question)}
+                        className="rounded-full border px-4 py-2 text-sm bg-gray-50 hover:bg-blue-50 hover:border-blue-500 transition"
+                    >
+                        {question}
+                    </button>
+                ))}
+            </div>
         </div>
-
     );
-
 }

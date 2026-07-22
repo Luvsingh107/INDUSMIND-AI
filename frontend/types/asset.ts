@@ -1,9 +1,6 @@
 export interface Asset {
-  id: string;
-
-  name: string;
-
-  type: string;
-
-  health: number;
+  filename: string
+  pages: number
+  equipment: string[]
+  maintenance_intervals: string[]
 }

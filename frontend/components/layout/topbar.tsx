@@ -2,6 +2,7 @@
 
 import { Bell } from "lucide-react";
 import { Input } from "@/components/ui/input";
+import RefreshButton from "@/components/dashboard/refresh-button";
 
 export default function Topbar() {
   return (
@@ -12,9 +13,13 @@ export default function Topbar() {
       />
 
       <div className="flex items-center gap-4">
+        <RefreshButton />
+
         <Bell size={20} />
 
-        <div className="h-10 w-10 rounded-full bg-blue-600" />
+        <div className="flex h-10 w-10 items-center justify-center rounded-full bg-blue-600 font-semibold text-white">
+          L
+        </div>
       </div>
     </header>
   );

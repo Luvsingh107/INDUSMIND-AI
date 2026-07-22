@@ -1,29 +1,14 @@
 "use client";
 
-import { motion } from "framer-motion";
-import { Card, CardContent } from "@/components/ui/card";
-import { Progress } from "@/components/ui/progress";
+import { Activity, Brain, ShieldCheck, TriangleAlert } from "lucide-react";
+import { DashboardStat } from "@/types/dashboard";
 
-import {
-  Activity,
-  Brain,
-  ShieldCheck,
-  TriangleAlert,
-} from "lucide-react";
-
-interface KPIProps {
-  title: string;
-  value: number;
-  suffix: string;
-  trend: string;
-  description: string;
-  icon: "activity" | "shield" | "brain" | "alert";
-}
+type Props = DashboardStat;
 
 const icons = {
   activity: Activity,
-  shield: ShieldCheck,
   brain: Brain,
+  shield: ShieldCheck,
   alert: TriangleAlert,
 };
 
@@ -34,52 +19,33 @@ export default function KPICard({
   trend,
   description,
   icon,
-}: KPIProps) {
+}: Props) {
   const Icon = icons[icon];
 
-  const isPositiveTrend = trend.startsWith("+");
-
   return (
-    <motion.div
-      whileHover={{ y: -6 }}
-      transition={{ duration: 0.2 }}
-    >
-      <Card className="rounded-2xl border border-slate-200 shadow-sm transition-all hover:shadow-lg">
-        <CardContent className="space-y-5 p-6">
-          <div className="flex items-center justify-between">
-            <div className="rounded-xl bg-slate-100 p-3">
-              <Icon className="h-6 w-6 text-blue-600" />
-            </div>
+    <div className="rounded-2xl border bg-white p-6 shadow-sm">
+      <div className="flex items-center justify-between">
+        <div>
+          <p className="text-sm text-slate-500">{title}</p>
 
-            <span
-              className={`text-sm font-semibold ${
-                isPositiveTrend
-                  ? "text-green-600"
-                  : "text-red-600"
-              }`}
-            >
-              {trend}
-            </span>
-          </div>
+          <h2 className="mt-2 text-3xl font-bold">
+            {value}
+            {suffix}
+          </h2>
 
-          <div>
-            <p className="text-sm text-slate-500">
-              {title}
-            </p>
-
-            <h2 className="mt-2 text-4xl font-bold tracking-tight">
-              {value}
-              {suffix}
-            </h2>
-          </div>
-
-          <Progress value={value} className="h-2" />
-
-          <p className="text-sm text-slate-500">
-            {description}
+          <p className="mt-1 text-sm text-emerald-600">
+            {trend}
           </p>
-        </CardContent>
-      </Card>
-    </motion.div>
+        </div>
+
+        <div className="rounded-xl bg-blue-50 p-3">
+          <Icon className="h-6 w-6 text-blue-600" />
+        </div>
+      </div>
+
+      <p className="mt-4 text-sm text-slate-500">
+        {description}
+      </p>
+    </div>
   );
 }
