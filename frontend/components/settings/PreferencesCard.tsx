@@ -11,17 +11,14 @@ export default function PreferencesCard() {
       icon={<Palette className="h-5 w-5 text-pink-600" />}
     >
       <div className="space-y-8">
-
         {/* Theme */}
 
         <div>
-
           <h3 className="mb-4 font-semibold text-slate-900">
             Appearance
           </h3>
 
           <div className="grid gap-4 md:grid-cols-3">
-
             {[
               {
                 title: "Light",
@@ -55,24 +52,19 @@ export default function PreferencesCard() {
                     ? "Currently Active"
                     : "Click to switch"}
                 </p>
-
               </button>
             ))}
-
           </div>
-
         </div>
 
         {/* Notifications */}
 
         <div>
-
           <h3 className="mb-4 font-semibold">
             Notifications
           </h3>
 
           <div className="space-y-4">
-
             {[
               "Document Upload Completed",
               "AI Response Failures",
@@ -92,96 +84,101 @@ export default function PreferencesCard() {
                   defaultChecked
                   className="h-5 w-5 accent-blue-600"
                 />
-
               </div>
             ))}
-
           </div>
-
         </div>
 
         {/* Dashboard */}
 
         <div>
-
           <h3 className="mb-4 font-semibold">
             Dashboard Refresh
           </h3>
 
-          <select className="w-full rounded-xl border px-4 py-3">
+          <select
+            defaultValue="30 Seconds"
+            className="w-full rounded-xl border px-4 py-3"
+          >
+            <option value="15 Seconds">
+              15 Seconds
+            </option>
 
-            <option>15 Seconds</option>
+            <option value="30 Seconds">
+              30 Seconds
+            </option>
 
-            <option selected>30 Seconds</option>
+            <option value="1 Minute">
+              1 Minute
+            </option>
 
-            <option>1 Minute</option>
-
-            <option>5 Minutes</option>
-
+            <option value="5 Minutes">
+              5 Minutes
+            </option>
           </select>
-
         </div>
 
         {/* AI Experience */}
 
         <div>
-
           <h3 className="mb-4 font-semibold">
             AI Response Preferences
           </h3>
 
           <div className="grid gap-4 md:grid-cols-2">
-
             <div>
-
               <label className="mb-2 block text-sm text-slate-500">
                 Response Style
               </label>
 
-              <select className="w-full rounded-xl border px-4 py-3">
+              <select
+                defaultValue="Balanced"
+                className="w-full rounded-xl border px-4 py-3"
+              >
+                <option value="Concise">
+                  Concise
+                </option>
 
-                <option>Concise</option>
+                <option value="Balanced">
+                  Balanced
+                </option>
 
-                <option selected>Balanced</option>
-
-                <option>Detailed</option>
-
+                <option value="Detailed">
+                  Detailed
+                </option>
               </select>
-
             </div>
 
             <div>
-
               <label className="mb-2 block text-sm text-slate-500">
                 Citation Mode
               </label>
 
-              <select className="w-full rounded-xl border px-4 py-3">
+              <select
+                defaultValue="Always"
+                className="w-full rounded-xl border px-4 py-3"
+              >
+                <option value="Always">
+                  Always
+                </option>
 
-                <option>Always</option>
+                <option value="Only when needed">
+                  Only when needed
+                </option>
 
-                <option>Only when needed</option>
-
-                <option>Never</option>
-
+                <option value="Never">
+                  Never
+                </option>
               </select>
-
             </div>
-
           </div>
-
         </div>
 
         <div className="flex justify-end">
-
           <button className="rounded-xl bg-blue-600 px-6 py-3 font-medium text-white transition hover:bg-blue-700">
-
             Save Preferences
-
           </button>
-
         </div>
-
       </div>
     </SectionCard>
   );
