@@ -1,3 +1,39 @@
+<p align="center">
+  <img src="docs/banner.png" alt="INDUSMIND AI Banner" width="100%">
+</p>
+
+<h1 align="center">INDUSMIND AI</h1>
+
+<p align="center">
+Industrial Retrieval-Augmented Generation Platform
+</p>
+
+<p align="center">
+
+<img src="https://img.shields.io/badge/Python-3.11-blue?style=for-the-badge"/>
+
+<img src="https://img.shields.io/badge/FastAPI-Backend-009688?style=for-the-badge"/>
+
+<img src="https://img.shields.io/badge/Next.js-Frontend-black?style=for-the-badge"/>
+
+<img src="https://img.shields.io/badge/ChromaDB-VectorDB-orange?style=for-the-badge"/>
+
+<img src="https://img.shields.io/badge/OpenRouter-LLM-purple?style=for-the-badge"/>
+
+<img src="https://img.shields.io/badge/TypeScript-5.0-3178C6?style=for-the-badge"/>
+
+<img src="https://img.shields.io/badge/License-MIT-yellow?style=for-the-badge"/>
+
+<img src="https://img.shields.io/badge/Status-Completed-success?style=for-the-badge"/>
+
+</p>
+
+---
+
+An industrial AI platform that combines Retrieval-Augmented Generation (RAG), semantic search and modern web technologies to help engineers interact with industrial documentation through natural language.
+
+---
+
 # INDUSMIND AI
 
 An industrial AI assistant that combines Retrieval-Augmented Generation (RAG), semantic search and an interactive dashboard to help engineers interact with industrial documentation through natural language.
